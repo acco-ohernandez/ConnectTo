@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <!--<AddIn Type="Command">
+    <Text>ConnectTo - Command 1</Text>
+    <Description>Some description</Description>
+    <Assembly>ConnectTo\ConnectTo.dll</Assembly>
+    <FullClassName>ConnectTo.Command1</FullClassName>
+    <ClientId>978391ad-6026-4923-9b43-bd4812837e47</ClientId>
+    <VendorId>com.ACCO ENGINEERED SYSTEMS</VendorId>
+    <VendorDescription>ACCO ENGINEERED SYSTEMS, https://www.accoes.com/</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Text>ConnectTo - Command 2</Text>
+    <Description>Some description</Description>
+    <Assembly>ConnectTo\ConnectTo.dll</Assembly>
+    <FullClassName>ConnectTo.Command2</FullClassName>
+    <ClientId>f96f8842-617b-4838-9339-11518a767bd6</ClientId>
+    <VendorId>com.ACCO ENGINEERED SYSTEMS</VendorId>
+    <VendorDescription>ACCO ENGINEERED SYSTEMS, https://www.accoes.com/</VendorDescription>
+  </AddIn>-->
+  <AddIn Type="Application">
+    <Name>ConnectTo</Name>
+    <Assembly>ConnectTo\ConnectTo.dll</Assembly>
+    <FullClassName>ConnectTo.App</FullClassName>
+    <ClientId>e89529d1-8ec3-4262-afe4-89fd3f0c2dec</ClientId>
+    <VendorId>com.ACCO ENGINEERED SYSTEMS</VendorId>
+    <VendorDescription>ACCO ENGINEERED SYSTEMS, https://www.accoes.com/</VendorDescription>
+  </AddIn>
+</RevitAddIns>
