@@ -23,8 +23,11 @@ namespace ConnectTo
             PushButtonData btnData1 = Cmd_ConnectTo.GetButtonData();
             PushButton myButton1 = panel.AddItem(btnData1) as PushButton;
 
-            //PushButtonData btnData2 = Command2.GetButtonData();
-            //PushButton myButton2 = panel.AddItem(btnData2) as PushButton;
+            PushButtonData btnData2 = Cmd_Parallel.GetButtonData();
+            PushButton myButton2 = panel.AddItem(btnData2) as PushButton;
+
+            //PushButtonData btnTemplate = Cmd_Template.GetButtonData();
+            //PushButton myButton = panel.AddItem(btnData2) as PushButton;
 
             // NOTE:
             // To create a new tool, copy lines 35 and 39 and rename the variables to "btnData3" and "myButton3". 
