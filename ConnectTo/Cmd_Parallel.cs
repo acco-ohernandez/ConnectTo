@@ -181,7 +181,7 @@ namespace ConnectTo
         #region Helper Methods
         private XYZ GetElementDirection(Element element)
         {
-            // Try multiple methods in order, similar to the Python script logic
+            // Try multiple methods in order logic
             List<Func<Element, XYZ>> directionMethods = new List<Func<Element, XYZ>>
             {
                 GetGridDirection,
