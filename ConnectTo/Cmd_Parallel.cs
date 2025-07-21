@@ -41,32 +41,43 @@ namespace ConnectTo
                 List<RotationResult> rotationResults = new List<RotationResult>();
 
                 bool continueSelection = true;
-
+                int selectedCount = 0;
                 while (continueSelection)
                 {
                     IList<Reference> targetReferences = null;
 
                     try
                     {
-                        TaskDialogResult result = TaskDialog.Show(
-                            "Selection",
-                            "Select elements to rotate:\n\n- Click Yes for single selection\n- Click No for rectangle selection\n- Click Cancel to finish.",
-                            TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No | TaskDialogCommonButtons.Cancel);
+                        //TaskDialogResult result = TaskDialog.Show(
+                        //    "Selection",
+                        //    "Select elements to rotate:\n\n- Click Yes for single selection\n- Click No for rectangle selection\n- Click Cancel to finish.",
+                        //    TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No | TaskDialogCommonButtons.Cancel);
 
-                        if (result == TaskDialogResult.Yes)
+                        //if (result == TaskDialogResult.Yes)
+                        //{
+                        //    Reference targetRef = uiDoc.Selection.PickObject(ObjectType.Element, "Pick a target element to rotate.");
+                        //    targetReferences = new List<Reference> { targetRef };
+                        //}
+                        //else if (result == TaskDialogResult.No)
+                        //{
+                        //    targetReferences = uiDoc.Selection.PickObjects(ObjectType.Element, "Select elements to rotate.").ToList();
+                        //}
+                        //else
+                        //{
+                        //    continueSelection = false;
+                        //    break;
+                        //}
+                        if (selectedCount == 0 || selectedCount > 1)
+                        {
+                            targetReferences = uiDoc.Selection.PickObjects(ObjectType.Element, "Select elements to rotate.").ToList();
+                            selectedCount = targetReferences.Count;
+                        }
+                        else
                         {
                             Reference targetRef = uiDoc.Selection.PickObject(ObjectType.Element, "Pick a target element to rotate.");
                             targetReferences = new List<Reference> { targetRef };
                         }
-                        else if (result == TaskDialogResult.No)
-                        {
-                            targetReferences = uiDoc.Selection.PickObjects(ObjectType.Element, "Select elements to rotate.").ToList();
-                        }
-                        else
-                        {
-                            continueSelection = false;
-                            break;
-                        }
+
                     }
                     catch (Autodesk.Revit.Exceptions.OperationCanceledException)
                     {
@@ -147,15 +158,16 @@ namespace ConnectTo
 
                         trans.Commit();
                     }
+
                 }
 
                 if (rotationResults.Count > 0)
                 {
-                    string report = string.Join(Environment.NewLine,
-                        rotationResults.Select(r =>
-                            $"Element Id: {r.ElementId.IntegerValue}, Rotation: {r.RotationDegrees:F2} degrees"));
+                    //string report = string.Join(Environment.NewLine,
+                    //    rotationResults.Select(r =>
+                    //        $"Element Id: {r.ElementId.IntegerValue}, Rotation: {r.RotationDegrees:F2} degrees"));
 
-                    TaskDialog.Show("Parallel Rotation Summary", report);
+                    //TaskDialog.Show("Parallel Rotation Summary", report);
                 }
                 else
                 {

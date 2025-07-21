@@ -8,11 +8,13 @@ using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 
+
 namespace ConnectTo
 {
     [Transaction(TransactionMode.Manual)]
     public class Cmd_ConnectTo : IExternalCommand
     {
+        // https://github.com/CyrilWaechter/pyRevitMEP/blob/master/pyRevitMEP.tab/Modify.panel/Connect.stack/ConnectTo.pushbutton/script.py
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             UIApplication uiapp = commandData.Application;
