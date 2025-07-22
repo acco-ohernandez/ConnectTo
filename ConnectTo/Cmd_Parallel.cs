@@ -48,32 +48,15 @@ namespace ConnectTo
 
                     try
                     {
-                        //TaskDialogResult result = TaskDialog.Show(
-                        //    "Selection",
-                        //    "Select elements to rotate:\n\n- Click Yes for single selection\n- Click No for rectangle selection\n- Click Cancel to finish.",
-                        //    TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No | TaskDialogCommonButtons.Cancel);
-
-                        //if (result == TaskDialogResult.Yes)
-                        //{
-                        //    Reference targetRef = uiDoc.Selection.PickObject(ObjectType.Element, "Pick a target element to rotate.");
-                        //    targetReferences = new List<Reference> { targetRef };
-                        //}
-                        //else if (result == TaskDialogResult.No)
-                        //{
-                        //    targetReferences = uiDoc.Selection.PickObjects(ObjectType.Element, "Select elements to rotate.").ToList();
-                        //}
-                        //else
-                        //{
-                        //    continueSelection = false;
-                        //    break;
-                        //}
                         if (selectedCount == 0 || selectedCount > 1)
                         {
+                            // this allows multiple selections using the selection box
                             targetReferences = uiDoc.Selection.PickObjects(ObjectType.Element, "Select elements to rotate.").ToList();
                             selectedCount = targetReferences.Count;
                         }
                         else
                         {
+                            // this allows single selection by clicking on an element
                             Reference targetRef = uiDoc.Selection.PickObject(ObjectType.Element, "Pick a target element to rotate.");
                             targetReferences = new List<Reference> { targetRef };
                         }
@@ -81,8 +64,8 @@ namespace ConnectTo
                     }
                     catch (Autodesk.Revit.Exceptions.OperationCanceledException)
                     {
-                        continueSelection = false;
-                        break;
+                        continueSelection = false; // this will exit the loop if the user cancels the selection
+                        break; // Exit the loop if selection is cancelled by the user using Escape key
                     }
 
                     if (targetReferences == null || targetReferences.Count == 0)
@@ -163,6 +146,7 @@ namespace ConnectTo
 
                 if (rotationResults.Count > 0)
                 {
+                    // Commented out reporting of rotation results
                     //string report = string.Join(Environment.NewLine,
                     //    rotationResults.Select(r =>
                     //        $"Element Id: {r.ElementId.IntegerValue}, Rotation: {r.RotationDegrees:F2} degrees"));
