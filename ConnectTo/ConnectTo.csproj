@@ -70,6 +70,28 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\ConnectTo_16x16.png" />
+	  <None Remove="Resources\ConnectTo_32x32.png" />
+	  <None Remove="Resources\Parallel_16x16.png" />
+	  <None Remove="Resources\Parallel_32x32.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\ConnectTo_16x16.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Resources\ConnectTo_32x32.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Resources\Parallel_16x16.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Resources\Parallel_32x32.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Resource Include="Resources\Blue_16.png" />
 	  <Resource Include="Resources\Blue_32.png" />
 	  <Resource Include="Resources\Green_16.png" />

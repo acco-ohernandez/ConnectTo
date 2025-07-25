@@ -367,9 +367,9 @@ namespace ConnectTo
                 buttonInternalName,
                 buttonTitle,
                 MethodBase.GetCurrentMethod().DeclaringType?.FullName,
-                Properties.Resources.Blue_32,
-                Properties.Resources.Blue_16,
-                "This is a tooltip for Button 1");
+                Properties.Resources.Parallel_32x32,
+                Properties.Resources.Parallel_16x16,
+                "This will make to objects parallel to each other. The first element you select will be the reference element for all the other elements you want to make parallel to to the reference one.");
 
             return myButtonData1.Data;
         }

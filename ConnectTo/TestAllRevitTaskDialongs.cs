@@ -17,8 +17,15 @@ namespace ConnectTo
             // this is a variable for the current Revit model
             Document doc = uiapp.ActiveUIDocument.Document;
             // This will show all the different Task Dialogs from the RevitTaskDialog.cs wrapper class
+
             try
             {
+                //// test all using the built-in TestAllDialogVariants method
+                //RevitTaskDialog.TestAllDialogVariants();
+
+                // or 
+                // test all using the RevitTaskDialogBuilder class directly
+
                 // Example 1: Basic dialog with title and message
                 new RevitTaskDialogBuilder("Basic Dialog", "First test.")
                     .WithContent("This is a basic dialog with a title and a message.")
@@ -27,7 +34,7 @@ namespace ConnectTo
                 // Example 2: Dialog with Information icon
                 new RevitTaskDialogBuilder("Info", "Operation Successful")
                     .WithContent("The operation was completed without any errors.")
-                    .WithIcon(RevitTaskDialog.DialogIconType.Information)
+                    .WithIcon("information")
                     .Show();
 
                 // Example 3: Warning dialog with no command links
@@ -88,7 +95,7 @@ namespace ConnectTo
         {
             // use this method to define the properties for this command in the Revit ribbon
             string buttonInternalName = "btnTemplate";
-            string buttonTitle = "TaskDioalogs";
+            string buttonTitle = "TaskDioalogs Test";
 
             Utils.ButtonDataClass myButtonData1 = new Utils.ButtonDataClass(
                 buttonInternalName,
