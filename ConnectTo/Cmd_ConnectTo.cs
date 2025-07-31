@@ -216,7 +216,7 @@ namespace ConnectTo
                 MethodBase.GetCurrentMethod().DeclaringType?.FullName,
                 Properties.Resources.ConnectTo_32x32,
                 Properties.Resources.ConnectTo_16x16,
-                "This button will connect air ducts or pipes. The first object end selected will move and connect to the second object you select. The command remains active to allow you to continue connecting elements until you Esc out of the command.");
+                "This button will make fitting to fitting duct and pipe connections. The first fitting selected will move and connect to the second fitting you select. The command remains active to allow you to continue connecting elements until you Esc out of the command.");
 
             return myButtonData1.Data;
         }
@@ -251,5 +251,6 @@ namespace ConnectTo
             return true;
         }
     }
+
 }
 

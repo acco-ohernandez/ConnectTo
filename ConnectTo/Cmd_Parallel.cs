@@ -369,7 +369,7 @@ namespace ConnectTo
                 MethodBase.GetCurrentMethod().DeclaringType?.FullName,
                 Properties.Resources.Parallel_32x32,
                 Properties.Resources.Parallel_16x16,
-                "This will make to objects parallel to each other. The first element you select will be the reference element for all the other elements you want to make parallel to to the reference one.");
+                "This will make objects parallel to each other. The first element you select will be the reference element,the next objects you select will be made parallel to the reference element.");
 
             return myButtonData1.Data;
         }
