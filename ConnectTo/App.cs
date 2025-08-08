@@ -29,6 +29,12 @@ namespace ConnectTo
             PushButtonData btnData3 = TestAllRevitTaskDialongs.GetButtonData();
             PushButton myButton3 = panel.AddItem(btnData3) as PushButton;
 
+            PushButtonData btnData4 = Cmd_Transition.GetButtonData();
+            PushButton myButton4 = panel.AddItem(btnData4) as PushButton;
+
+            PushButtonData btnData5 = Cmd_AccoTransition.GetButtonData();
+            PushButton myButton5 = panel.AddItem(btnData5) as PushButton;
+
             //PushButtonData btnTemplate = Cmd_Template.GetButtonData();
             //PushButton myButton = panel.AddItem(btnData2) as PushButton;
 

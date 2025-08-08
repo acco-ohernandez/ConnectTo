@@ -9,6 +9,8 @@ using System.Text;
 
 using Autodesk.Revit.UI;
 
+using TaskDialogIcon = Autodesk.Revit.UI.TaskDialogIcon;
+
 /// Author: Orlando R Hernandez
 
 /// <summary>
