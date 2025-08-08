@@ -35,6 +35,9 @@ namespace ConnectTo
             PushButtonData btnData5 = Cmd_AccoTransition.GetButtonData();
             PushButton myButton5 = panel.AddItem(btnData5) as PushButton;
 
+            PushButtonData btnData6 = Cmd_TransitionLength.GetButtonData();
+            PushButton myButton6 = panel.AddItem(btnData6) as PushButton;
+
             //PushButtonData btnTemplate = Cmd_Template.GetButtonData();
             //PushButton myButton = panel.AddItem(btnData2) as PushButton;
 
