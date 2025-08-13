@@ -23,91 +23,91 @@ namespace ConnectTo
 
             try
             {
-                // Try to get preselected elements first
-                ICollection<ElementId> selectedIds = uiDoc.Selection.GetElementIds();
+                //// Try to get preselected elements first
+                //ICollection<ElementId> selectedIds = uiDoc.Selection.GetElementIds();
 
-                if (selectedIds.Count > 0)
-                {
-                    foreach (ElementId id in selectedIds)
-                    {
-                        Element elem = doc.GetElement(id);
-                        if (IsValidTransitionFitting(elem))
-                        {
-                            transitionFittings.Add((FamilyInstance)elem);
-                        }
-                    }
-                }
+                //if (selectedIds.Count > 0)
+                //{
+                //    foreach (ElementId id in selectedIds)
+                //    {
+                //        Element elem = doc.GetElement(id);
+                //        if (IsValidTransitionFitting(elem))
+                //        {
+                //            transitionFittings.Add((FamilyInstance)elem);
+                //        }
+                //    }
+                //}
 
-                // If no valid preselection, prompt user to select transitions manually
-                if (transitionFittings.Count == 0)
-                {
-                    IList<Reference> pickedRefs = uiDoc.Selection.PickObjects(ObjectType.Element, new TransitionFittingSelectionFilter(), "Select duct transition fittings to update");
-                    foreach (Reference reference in pickedRefs)
-                    {
-                        Element elem = doc.GetElement(reference);
-                        if (IsValidTransitionFitting(elem))
-                        {
-                            transitionFittings.Add((FamilyInstance)elem);
-                        }
-                    }
-                }
+                //// If no valid preselection, prompt user to select transitions manually
+                //if (transitionFittings.Count == 0)
+                //{
+                //    IList<Reference> pickedRefs = uiDoc.Selection.PickObjects(ObjectType.Element, new TransitionFittingSelectionFilter(), "Select duct transition fittings to update");
+                //    foreach (Reference reference in pickedRefs)
+                //    {
+                //        Element elem = doc.GetElement(reference);
+                //        if (IsValidTransitionFitting(elem))
+                //        {
+                //            transitionFittings.Add((FamilyInstance)elem);
+                //        }
+                //    }
+                //}
 
-                if (transitionFittings.Count == 0)
-                {
-                    TaskDialog.Show("Info", "No duct transition fittings selected.");
-                    return Result.Cancelled;
-                }
+                //if (transitionFittings.Count == 0)
+                //{
+                //    TaskDialog.Show("Info", "No duct transition fittings selected.");
+                //    return Result.Cancelled;
+                //}
 
-                List<(FamilyInstance fitting, FamilySymbol bestSymbol)> compliantFittings = new();
-                List<FamilyInstance> nonCompliantFittings = new();
+                //List<(FamilyInstance fitting, FamilySymbol bestSymbol)> compliantFittings = new();
+                //List<FamilyInstance> nonCompliantFittings = new();
 
-                // Evaluate all fittings BEFORE starting the transaction
-                foreach (FamilyInstance fitting in transitionFittings)
-                {
-                    //if (FittingEvaluator.TryFindBestFitting(doc, fitting, out FamilySymbol bestSymbol))
-                    if (FittingEvaluator.TryFindBestFitting(doc, fitting, out FamilySymbol? bestSymbol) && bestSymbol != null)
-                    {
-                        compliantFittings.Add((fitting, bestSymbol));
-                    }
-                    else
-                    {
-                        nonCompliantFittings.Add(fitting);
-                    }
-                }
+                //// Evaluate all fittings BEFORE starting the transaction
+                //foreach (FamilyInstance fitting in transitionFittings)
+                //{
+                //    //if (FittingEvaluator.TryFindBestFitting(doc, fitting, out FamilySymbol bestSymbol))
+                //    if (FittingEvaluator.TryFindBestFitting(doc, fitting, out FamilySymbol? bestSymbol) && bestSymbol != null)
+                //    {
+                //        compliantFittings.Add((fitting, bestSymbol));
+                //    }
+                //    else
+                //    {
+                //        nonCompliantFittings.Add(fitting);
+                //    }
+                //}
 
-                using (Transaction tx = new Transaction(doc, "Update Transition Fittings"))
-                {
-                    tx.Start();
+                //using (Transaction tx = new Transaction(doc, "Update Transition Fittings"))
+                //{
+                //    tx.Start();
 
-                    foreach (var (fitting, bestSymbol) in compliantFittings)
-                    {
-                        fitting.Symbol = bestSymbol;
-                    }
+                //    foreach (var (fitting, bestSymbol) in compliantFittings)
+                //    {
+                //        fitting.Symbol = bestSymbol;
+                //    }
 
-                    if (nonCompliantFittings.Count > 0)
-                    {
-                        TaskDialog td = new TaskDialog("Non-Compliant Fittings")
-                        {
-                            MainInstruction = $"{nonCompliantFittings.Count} transition fittings exceed allowable angles.",
-                            MainContent = "Do you want to proceed anyway?",
-                            CommonButtons = TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No,
-                            DefaultButton = TaskDialogResult.No
-                        };
+                //    if (nonCompliantFittings.Count > 0)
+                //    {
+                //        TaskDialog td = new TaskDialog("Non-Compliant Fittings")
+                //        {
+                //            MainInstruction = $"{nonCompliantFittings.Count} transition fittings exceed allowable angles.",
+                //            MainContent = "Do you want to proceed anyway?",
+                //            CommonButtons = TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No,
+                //            DefaultButton = TaskDialogResult.No
+                //        };
 
-                        if (td.Show() == TaskDialogResult.No)
-                        {
-                            tx.RollBack();
-                            return Result.Cancelled;
-                        }
-                        else
-                        {
-                            string nonCompliantIds = string.Join("\n", nonCompliantFittings.Select(f => f.Id.ToString()));
-                            TaskDialog.Show("Non-Compliant IDs", $"The following fitting IDs were not updated due to exceeding angle constraints:\n{nonCompliantIds}");
-                        }
-                    }
+                //        if (td.Show() == TaskDialogResult.No)
+                //        {
+                //            tx.RollBack();
+                //            return Result.Cancelled;
+                //        }
+                //        else
+                //        {
+                //            string nonCompliantIds = string.Join("\n", nonCompliantFittings.Select(f => f.Id.ToString()));
+                //            TaskDialog.Show("Non-Compliant IDs", $"The following fitting IDs were not updated due to exceeding angle constraints:\n{nonCompliantIds}");
+                //        }
+                //    }
 
-                    tx.Commit();
-                }
+                //    tx.Commit();
+                //}
 
                 return Result.Succeeded;
             }
