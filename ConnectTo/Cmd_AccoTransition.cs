@@ -1143,7 +1143,7 @@ The solution should be organized into the following static and public classes wi
 
 
 
-// ########################### tested working version
+// ########################### tested working version - iterates through all available fitting types and checks angles
 //using System;
 //using System.Collections.Generic;
 //using System.Linq;
