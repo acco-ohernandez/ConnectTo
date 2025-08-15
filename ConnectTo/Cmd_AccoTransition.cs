@@ -62,16 +62,16 @@ namespace ConnectTo
                     // If either connector is missing, show error and loop again
                     if (conn1 == null || conn2 == null)
                     {
-                        TaskDialog.Show("Error", "One of the selected elements has no unused connector.");
+                        TaskDialog.Show("Cannot Proceed", "One of the selected elements does not have an open end.");// error
                         continue;
                     }
 
                     // Ensure both connectors belong to the same domain (e.g., HVAC)
-                    if (conn1.Domain != conn2.Domain)
-                    {
-                        TaskDialog.Show("Domain Error", "Connectors are from different domains.");
-                        continue;
-                    }
+                    //if (conn1.Domain != conn2.Domain)
+                    //{
+                    //    TaskDialog.Show("Cannot Proceed", "You must select 2 ducts.");
+                    //    continue;
+                    //}
 
                     // Try to find a valid fitting length based on allowed angles
                     bool userAcknowledgedAngleOverride = false;
@@ -82,7 +82,7 @@ namespace ConnectTo
                     {
                         TaskDialog td = new TaskDialog("Angle Constraint")
                         {
-                            MainInstruction = "The fitting angle exceeds the 30° construction limit. Please review the offset lengths or consider using elbows. If a transition angle greater than 30° is required, you must consult with the detailing department.",
+                            MainInstruction = "The fitting angle exceeds the 30° construction limit. Please review offset lengths or consider using elbows. If a transition angle greater than 30° is required, please consult the detailing department.",
                             MainContent = "Do you want to proceed anyway?",
                             CommonButtons = TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No,
                             DefaultButton = TaskDialogResult.No
@@ -103,7 +103,7 @@ namespace ConnectTo
                         FamilyInstance fittingInstance = doc.Create.NewTransitionFitting(conn1, conn2);
                         if (fittingInstance == null)
                         {
-                            TaskDialog.Show("Error", "Failed to create transition fitting.");
+                            TaskDialog.Show("Cannot Proceed", "Failed to create transition fitting.");
                             tx.RollBack();
                             continue; // Try again
                         }
@@ -198,7 +198,7 @@ namespace ConnectTo
 
                     if (elem2.Id == elem1.Id)
                     {
-                        TaskDialog.Show("Invalid Selection", "You cannot pick the same element twice. Please pick a different element.");
+                        TaskDialog.Show("Action Required", "Please select two unique elements before proceeding.");
                         continue;
                     }
 
@@ -218,7 +218,7 @@ namespace ConnectTo
         internal static PushButtonData GetButtonData()
         {
             string buttonInternalName = "btnAccoTransition";
-            string buttonTitle = "ACCO Transition";
+            string buttonTitle = "Transition\nTwo Ducts";
 
             // This helper wraps Revit push button creation and icon assignment
             Utils.ButtonDataClass myButtonData1 = new Utils.ButtonDataClass(
@@ -227,7 +227,7 @@ namespace ConnectTo
                 MethodBase.GetCurrentMethod().DeclaringType?.FullName,
                 Properties.Resources.Blue_32,
                 Properties.Resources.Blue_16,
-                "This button creates an MEP transition fitting between two open unused connectors if the ACCO Angle Constrains are met."
+                "This button adds a transition fitting between two open ended ducts with a transition length where angles are less than 30°."
             );
 
             return myButtonData1.Data;
@@ -251,7 +251,7 @@ namespace ConnectTo
             // Ensure both connectors are of supported types: rectangular, round, or oval
             if (!IsShapeSupported(conn1) || !IsShapeSupported(conn2))
             {
-                TaskDialog.Show("Unsupported Type", "One or both connectors have unsupported shapes. Only rectangular, round, and oval are supported.");
+                TaskDialog.Show("Cannot Proceed", "One or both ducts have unsupported shapes. Only rectangular, round, and oval are supported.");
                 return null;
             }
 

@@ -60,7 +60,7 @@ namespace ConnectTo
                 // if the user cliked on finish without selecting any fittings, the transitionFittings list will still be empty
                 if (transitionFittings.Count == 0)
                 {
-                    TaskDialog.Show("Info", "No duct transition fittings selected.");
+                    TaskDialog.Show("Cannot Proceed", "No duct transition fittings selected.");
                     return Result.Cancelled;
                 }
 
@@ -147,7 +147,7 @@ namespace ConnectTo
                             // select all the non-compliant fittings in the UI
                             uiDoc.Selection.SetElementIds(nonCompliantFittings.Select(f => f.Id).ToList());
                             // tell the user the selected transitions are not compliant.
-                            TaskDialog.Show("Ingo", "The non-compliant fittings have been left selected.");
+                            TaskDialog.Show("Fix Transition Length", "The non-compliant fittings have been left selected.");
                         }
                     }
 
@@ -177,7 +177,7 @@ namespace ConnectTo
         internal static PushButtonData GetButtonData()
         {
             string buttonInternalName = "btnTransitionLength";
-            string buttonTitle = "Transition Length";
+            string buttonTitle = "Fix Transition\nLength";
 
             Utils.ButtonDataClass myButtonData1 = new Utils.ButtonDataClass(
                 buttonInternalName,
@@ -185,7 +185,7 @@ namespace ConnectTo
                 MethodBase.GetCurrentMethod().DeclaringType?.FullName,
                 Properties.Resources.Blue_32,
                 Properties.Resources.Blue_16,
-                "This button checks that all the transitions in a duct system meet ACCO 30° or less Angle Constrains."
+                "This button will change the length of any selected transition to the shortest transition length where angles are less than 30°."
             );
 
             return myButtonData1.Data;
