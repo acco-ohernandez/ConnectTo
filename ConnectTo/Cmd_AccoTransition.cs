@@ -32,8 +32,8 @@ namespace ConnectTo
                 while (true)
                 {
                     // this variables will hold the selected elements and their global points
-                    Element elem1, elem2;
-                    XYZ xyz1, xyz2;
+                    Element elem1, elem2; // This will hold the selected elements.
+                    XYZ xyz1, xyz2; // This will hold the global points of the selected elements. The global point is the point in the model space where the user clicked.
 
                     // Ask user to pick two distinct duct elements (movable and stationary)
                     // and output them to elem1, xyz1, elem2, xyz2 or break if user cancels
