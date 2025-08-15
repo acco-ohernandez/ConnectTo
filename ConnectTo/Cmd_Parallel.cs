@@ -201,7 +201,7 @@ namespace ConnectTo
                 }
             }
 
-            TaskDialog.Show("Direction Error", $"Could not determine direction for element of type {element.GetType().Name} (Id: {element.Id.IntegerValue})");
+            TaskDialog.Show("Direction Error", $"Could not determine direction for element of type {element.GetType().Name} (Id: {GetElementIdValue(element.Id)})");
             return XYZ.BasisX; // Default fallback to avoid nulls
         }
 
@@ -230,10 +230,22 @@ namespace ConnectTo
                 }
             }
 
-            TaskDialog.Show("Origin Error", $"Could not determine origin for element of type {element.GetType().Name} (Id: {element.Id.IntegerValue})");
+            TaskDialog.Show("Origin Error", $"Could not determine origin for element of type {element.GetType().Name} (Id: {GetElementIdValue(element.Id)})");
             return XYZ.Zero; // Default fallback
         }
-
+        /// <summary>
+        ///     This method retrieves the integer value of an ElementId using a version-independent approach.
+        /// </summary>
+        /// <param name="elementId"></param>
+        /// <returns></returns>
+        private static int GetElementIdValue(ElementId elementId)
+        {
+#if REVIT2024 || REVIT2025
+            return (int)elementId.Value;
+#else
+            return elementId.IntegerValue;
+#endif
+        }
         private XYZ GetGridDirection(Element element)
         {
             if (element is Grid grid)
